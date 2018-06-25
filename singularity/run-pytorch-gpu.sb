@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#SBATCH --account=ddp315
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --time 00:30:00
+#SBATCH --export=ALL
+#SBATCH --no-requeue
+#SBATCH --job-name="pytorch-mnist-dist"
+#SBATCH --output="pytorch-mnist-dist.o%j.%N"
+#SBATCH --gres=gpu:k80:4
+
+declare -xr LOCAL_SCRATCH="/scratch/${USER}/${SLURM_JOB_ID}"
+declare -xr LUSTRE_SCRATCH="/oasis/scratch/comet/${USER}/temp_project"
+declare -xr SINGULARITY_MODULE='singularity/2.5.1'
+
+module purge
+module load "${SINGULARITY_MODULE}"
+module list
+printenv
+
+cd "${LOCAL_SCRATCH}"
+cp "${LUSTRE_SCRATCH}/SINGULARITY/images/pytorch-gpu.img" ./
+cp "${LUSTRE_SCRATCH}/SINGULARITY/pytorch-dist-examples.tar.gz" ./
+
+time -p tar -zxf pytorch-dist-examples.tar.gz
+
+rm *.tar.gz
+
+cd "${LOCAL_SCRATCH}/pytorch-dist-examples"
+time -p srun singularity exec ../pytorch-gpu.img /home/dmu/anaconda3/bin/python3 ./train_dist_gpu.py 4
