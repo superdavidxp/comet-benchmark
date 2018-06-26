@@ -140,11 +140,11 @@ def init_processes(rank, size, fn, backend='gloo'):
 
 if __name__ == "__main__":
 
-    #try:
-    #    sys.argv[1]
-    #except Exception as e:
-    #    print("|    usage: python train_dist_gpu.py [num_gpus]")
-    #    exit()
+    try:
+        sys.argv[1]
+    except Exception as e:
+        print("|    usage: python train_dist_gpu.py [num_gpus]")
+        exit()
 
     size = int(sys.argv[1])
     processes = []
