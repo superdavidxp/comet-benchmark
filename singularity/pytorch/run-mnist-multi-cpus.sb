@@ -24,8 +24,10 @@ module load "${SINGULARITY_MODULE}"
 module list
 
 cp -rf ../../../comet-benchmark "${LOCAL_SCRATCH}"
-cp "${LUSTRE_SCRATCH}/pytorch-gpu.img" "${LOCAL_SCRATCH}"
+cp "${LUSTRE_SCRATCH}/pytorch-cpu.img" "${LOCAL_SCRATCH}"
 
 cd "${LOCAL_SCRATCH}/comet-benchmark/singularity/pytorch"
 
-singularity exec --nv ${LOCAL_SCRATCH}/pytorch-gpu.img /opt/miniconda3/bin/python3 ./gpu-multi-mnist.py 8
+echo $(pwd)
+
+singularity exec --nv ${LOCAL_SCRATCH}/pytorch-cpu.img /opt/miniconda3/bin/python3 ./cpu-multi-mnist.py 8
