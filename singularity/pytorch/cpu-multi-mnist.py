@@ -127,7 +127,7 @@ def run(rank, size):
               epoch_loss / num_batches)
 
 
-def init_processes(rank, size, fn, backend='gloo'):
+def init_processes(rank, size, fn, backend='tcp'):
     """ Initialize the distributed environment. """
     os.environ['MASTER_ADDR'] = '127.0.0.1'
     os.environ['MASTER_PORT'] = '29500'
