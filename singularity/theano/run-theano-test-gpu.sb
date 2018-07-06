@@ -7,9 +7,9 @@
 #SBATCH --time 00:30:00
 #SBATCH --export=ALL
 #SBATCH --no-requeue
-#SBATCH --job-name="theano-test-cpu"
-#SBATCH --output="theano-test-cpu.o%j.%N"
-#SBATCH --error="theano-test-cpu.e%j.%N"
+#SBATCH --job-name="theano-test-gpu"
+#SBATCH --output="theano-test-gpu.o%j.%N"
+#SBATCH --error="theano-test-gpu.e%j.%N"
 #SBATCH --gres=gpu:k80:4
 
 declare -xr LOCAL_SCRATCH="/scratch/${USER}/${SLURM_JOB_ID}"
