@@ -1,6 +1,7 @@
 # singularity
 
 1. pytorch 
+   * mnist
 
 2. tensorflow
    * cifar10
