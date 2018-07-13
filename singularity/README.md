@@ -3,12 +3,12 @@
 1. pytorch 
 
 2. tensorflow
-* cifar10
+   * cifar10
 
 3. theano
 
 4. keras
-* mnist
+   * mnist
 
 Note:
 
