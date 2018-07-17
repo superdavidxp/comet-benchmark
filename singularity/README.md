@@ -23,5 +23,5 @@ Note:
     * Pytorch need 3rd party tool to visualize (matplotlib), TensorFlow has native tensorboard.
     * Pytorch can leverage multiple GPUs with almost no effort, TensorFlow defining parallelism is more manual.
 * Multiple CPU Cores on Tensorflow and Keras
-    * By default all CPUs available to the process are aggregated under cpu:0 device.
+    * By default all CPUs available to the process are aggregated under /cpu:0 device.
     * Only the different GPUs of one machine get indexed and viewed as separate devices.
