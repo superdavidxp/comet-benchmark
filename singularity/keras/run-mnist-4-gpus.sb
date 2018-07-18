@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#SBATCH --account=ddp315
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --time 00:30:00
+#SBATCH --export=ALL
+#SBATCH --no-requeue
+#SBATCH --job-name="keras-mnist-gpu"
+#SBATCH --output="keras-mnist-gpu.o%j.%N"
+#SBATCH --error="keras-mnist-gpu.e%j.%N"
+#SBATCH --gres=gpu:k80:4
+
+declare -xr LOCAL_SCRATCH="/scratch/${USER}/${SLURM_JOB_ID}"
+declare -xr LUSTRE_SCRATCH="/oasis/scratch/comet/mkandes/temp_project/singularity/images"
+declare -xr SINGULARITY_MODULE='singularity/2.5.1'
+
+module purge
+module load gnu
+module load mvapich2_ib
+module load cmake
+module load "${SINGULARITY_MODULE}"
+module list
+
+cp -rf ../../../comet-benchmark "${LOCAL_SCRATCH}"
+cp "${LUSTRE_SCRATCH}/keras-tensorflow-gpu.img" "${LOCAL_SCRATCH}"
+
+cd "${LOCAL_SCRATCH}/comet-benchmark/singularity/keras"
+
+echo $(pwd)
+
+singularity exec --nv ${LOCAL_SCRATCH}/keras-tensorflow-gpu.img python ./mnist_4_gpu.py

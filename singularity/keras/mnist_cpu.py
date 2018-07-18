@@ -1,3 +1,10 @@
+'''Trains a simple deep NN on the MNIST dataset.
+
+Gets to 98.40% test accuracy after 20 epochs
+(there is *a lot* of margin for parameter tuning).
+2 seconds per epoch on a K520 GPU.
+'''
+
 from __future__ import print_function
 
 import keras
@@ -6,9 +13,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.optimizers import RMSprop
 
-batch_size = 128
+batch_size = 1024
 num_classes = 10
-epochs = 20
+epochs = 10
 
 # the data, split between train and test sets
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -47,3 +54,4 @@ history = model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
