@@ -4,9 +4,10 @@
    * mnist
 
 2. tensorflow
-   * cifar10
+   * mnist
 
 3. theano
+   * toposort
 
 4. keras
    * mnist
