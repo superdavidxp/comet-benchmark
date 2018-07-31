@@ -27,4 +27,5 @@ Note:
     * By default all CPUs available to the process are aggregated under "/cpu:0" device.
     * Only the different GPUs of one machine get indexed and viewed as separate devices.
 * Multiple GPUs on tensorflow
-    * By default, TensorFlow maps nearly all of the GPU memory of all GPUs (subject to CUDA_VISIBLE_DEVICES) visible to the process.
+    * By default, TensorFlow maps nearly all of the GPU memory of all GPUs (subject to CUDA_VISIBLE_DEVICES) visible to the process. 
+    * However, the "Volatile GPU-Util" on each GPU may not be active.
