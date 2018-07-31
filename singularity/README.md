@@ -26,3 +26,5 @@ Note:
 * Multiple CPU Cores on Tensorflow and Keras
     * By default all CPUs available to the process are aggregated under "/cpu:0" device.
     * Only the different GPUs of one machine get indexed and viewed as separate devices.
+* Multiple GPUs on tensorflow
+    * By default, TensorFlow maps nearly all of the GPU memory of all GPUs (subject to CUDA_VISIBLE_DEVICES) visible to the process.
