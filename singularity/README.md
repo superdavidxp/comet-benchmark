@@ -4,7 +4,8 @@
    * mnist
 
 2. tensorflow
-   * mnist
+   * multiple GPUs
+   * multiple nodes
 
 3. theano
    * toposort
