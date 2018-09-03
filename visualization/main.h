@@ -15,6 +15,11 @@
 #include <vtkXMLStructuredGridWriter.h>
 #include <vtkStructuredGrid.h>
 #include <vtkSmartPointer.h>
+#include <vtkFloatArray.h>
+#include <vtkCellData.h>
+#include <vtkMPIController.h>
+#include <vtkProgrammableFilter.h>
+#include <vtkInformation.h>
 
 #define LEN 256
 
