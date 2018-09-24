@@ -6,6 +6,7 @@
 2. tensorflow
    * multiple GPUs
    * multiple nodes
+   * multiple MPI
 
 3. theano
    * toposort
