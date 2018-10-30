@@ -70,8 +70,7 @@ class Net(nn.Module):
         x = F.relu(self.fc1(x))
         x = F.dropout(x, training=self.training)
         x = self.fc2(x)
-        return F.log_softmax(x)
-
+        return F.log_softmax(input=x, dim=1)
 
 def partition_dataset():
     """ Partitioning MNIST """
@@ -84,7 +83,7 @@ def partition_dataset():
             transforms.Normalize((0.1307, ), (0.3081, ))
         ]))
     size = dist.get_world_size()
-    bsz = 3840 / float(size)
+    bsz = int(3840/float(size))
     partition_sizes = [1.0 / size for _ in range(size)]
     partition = DataPartitioner(dataset, partition_sizes)
     partition = partition.use(dist.get_rank())
@@ -121,7 +120,7 @@ def run(rank, size):
             optimizer.zero_grad()
             output = model(data)
             loss = F.nll_loss(output, target)
-            epoch_loss += loss.data[0]
+            epoch_loss += loss.item() #loss.data[0]
             loss.backward()
             average_gradients(model)
             optimizer.step()
