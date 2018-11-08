@@ -8,12 +8,14 @@ import torch.distributed as dist
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import socket
 
 from math import ceil
 from random import Random
 from torch.multiprocessing import Process
 from torch.autograd import Variable
 from torchvision import datasets, transforms
+from mpi4py import MPI
 
 
 class Partition(object):
@@ -101,17 +103,19 @@ def average_gradients(model):
         param.grad.data /= size
 
 
-def run(rank, size):
+def run(rank, size, host, ipad):
     """ Distributed Synchronous SGD Example """
+
+    print("|    I am rank {} in {} at {} :: {}".format(rank, size, host, ipad))
+
     torch.manual_seed(1234)
     train_set, bsz = partition_dataset()
     model = Net()
     model = model
-    print('rank = ', rank)
     optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
 
     num_batches = ceil(len(train_set.dataset) / float(bsz))
-    for epoch in range(20):
+    for epoch in range(10):
         epoch_loss = 0.0
         for data, target in train_set:
             data, target = Variable(data), Variable(target)
@@ -127,36 +131,27 @@ def run(rank, size):
               epoch_loss / num_batches)
 
 
-def init_processes(rank, size, fn, backend='tcp'):
+def init_processes(rank, size, host, ipad, fn):
     """ Initialize the distributed environment. """
-    os.environ['MASTER_ADDR'] = '127.0.0.1'
-    os.environ['MASTER_PORT'] = '29500'
-    dist.init_process_group(backend, rank=rank, world_size=size)
-    fn(rank, size)
+    torch.distributed.init_process_group(backend='gloo', init_method='file:///home/dmu/pytorch-shared-filesystem-init.tmp', rank=rank, world_size=size)
+    fn(rank, size, host, ipad)
 
 
 if __name__ == "__main__":
 
-    #try:
-    #    sys.argv[1]
-    #except Exception as e:
-    #    print("|    usage: python train_dist_gpu.py [num_gpus]")
-    #    exit()
-
-    size = int(sys.argv[1])
-    processes = []
+    rank = MPI.COMM_WORLD.Get_rank()
+    size = MPI.COMM_WORLD.Get_size()
+    host = socket.gethostname()
+    ipad = socket.gethostbyname(host)
 
     t_train_start = int(round(time.time() * 1000))
 
-    for rank in range(size):
-        p = Process(target=init_processes, args=(rank, size, run))
-        p.start()
-        processes.append(p)
-
-    for p in processes:
-        p.join()
+    init_processes(rank, size, host, ipad, run)
 
     t_train_end = int(round(time.time() * 1000))
     t_train_used = t_train_end - t_train_start
 
     print('|    Time used for Training : {} milliseconds.'.format(t_train_used))
+
+    MPI.COMM_WORLD.Barrier()
+    MPI.Finalize()
