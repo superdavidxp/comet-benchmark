@@ -30,4 +30,4 @@ cd "${LOCAL_SCRATCH}/comet-benchmark/singularity/pytorch"
 
 echo $(pwd)
 
-singularity exec --nv ${LOCAL_SCRATCH}/pytorch-cpu.img /opt/miniconda3/bin/python3 ./cpu-multi-mnist.py 8
+time -p srun singularity exec --nv ${LOCAL_SCRATCH}/pytorch-cpu.img /opt/miniconda3/bin/python3 ./cpu-multi-mnist.py

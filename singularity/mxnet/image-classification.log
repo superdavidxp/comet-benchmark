@@ -1,0 +1,16 @@
+2018-11-09 15:59:55,914 INFO Starting new image-classification task:, Namespace(batch_norm=False, batch_size=32, builtin_profiler=0, data_dir='', dataset='cifar10', dtype='float32', epochs=1, gpus='', kvstore='device', log_interval=50, lr=0.1, lr_factor=0.1, lr_steps='30,60,90', mode=None, model='vgg11', momentum=0.9, num_workers=4, prefix='', profile=False, resume='', save_frequency=10, seed=123, start_epoch=0, use_pretrained=False, use_thumbnail=False, wd=0.0001)
+2018-11-09 16:00:04,572 INFO downloaded http://data.mxnet.io/mxnet/data/cifar10.zip into data/cifar10.zip successfully
+2018-11-09 16:00:35,506 INFO Epoch[0] Batch [49]	Speed: 54.728732 samples/sec	accuracy=0.103750, top_k_accuracy_5=0.475000
+2018-11-09 16:01:04,651 INFO Epoch[0] Batch [99]	Speed: 55.460129 samples/sec	accuracy=0.103438, top_k_accuracy_5=0.486563
+2018-11-09 16:01:33,796 INFO Epoch[0] Batch [149]	Speed: 54.201638 samples/sec	accuracy=0.104167, top_k_accuracy_5=0.492292
+2018-11-09 16:02:03,258 INFO Epoch[0] Batch [199]	Speed: 53.651038 samples/sec	accuracy=0.104844, top_k_accuracy_5=0.489687
+2018-11-09 16:02:32,949 INFO Epoch[0] Batch [249]	Speed: 52.491544 samples/sec	accuracy=0.100625, top_k_accuracy_5=0.493875
+2018-11-09 16:03:02,542 INFO Epoch[0] Batch [299]	Speed: 54.279322 samples/sec	accuracy=0.098333, top_k_accuracy_5=0.498125
+2018-11-09 16:03:32,470 INFO Epoch[0] Batch [349]	Speed: 51.934489 samples/sec	accuracy=0.099018, top_k_accuracy_5=0.497232
+2018-11-09 16:04:02,450 INFO Epoch[0] Batch [399]	Speed: 51.252887 samples/sec	accuracy=0.100000, top_k_accuracy_5=0.498516
+2018-11-09 16:04:32,021 INFO Epoch[0] Batch [449]	Speed: 53.974647 samples/sec	accuracy=0.099653, top_k_accuracy_5=0.499375
+2018-11-09 16:05:02,914 INFO Epoch[0] Batch [499]	Speed: 33.631920 samples/sec	accuracy=0.100812, top_k_accuracy_5=0.498563
+2018-11-09 16:05:33,851 INFO Epoch[0] Batch [549]	Speed: 53.968526 samples/sec	accuracy=0.100568, top_k_accuracy_5=0.499886
+2018-11-09 16:06:03,623 INFO Epoch[0] Batch [599]	Speed: 52.965050 samples/sec	accuracy=0.099896, top_k_accuracy_5=0.500885
+2018-11-09 16:06:33,426 INFO Epoch[0] Batch [649]	Speed: 54.973651 samples/sec	accuracy=0.099760, top_k_accuracy_5=0.500817
+2018-11-09 16:07:03,088 INFO Epoch[0] Batch [699]	Speed: 51.290354 samples/sec	accuracy=0.100000, top_k_accuracy_5=0.501071

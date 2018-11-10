@@ -28,4 +28,4 @@ cp "${LUSTRE_SCRATCH}/pytorch-v0.4.1-gpu-20181019.simg" "${LOCAL_SCRATCH}"
 
 cd "${LOCAL_SCRATCH}/comet-benchmark/singularity/pytorch"
 
-singularity exec --nv ${LOCAL_SCRATCH}/pytorch-v0.4.1-gpu-20181019.simg /opt/miniconda3/bin/python3 ./gpu-multi-mnist.py 8
+time -p srun singularity exec --nv ${LOCAL_SCRATCH}/pytorch-v0.4.1-gpu-20181019.simg /opt/miniconda3/bin/python3 ./gpu-multi-mnist.py
